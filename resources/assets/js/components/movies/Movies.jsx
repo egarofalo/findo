@@ -7,28 +7,35 @@ export default class Movies extends Component {
         super(props);
         this.state = {
             currentMovie: null,
+            renderMovie: false,
         };
         this.onClickShowMovie = this.onClickShowMovie.bind(this);
+        this.onClickCloseMovie = this.onClickCloseMovie.bind(this);
     }
 
     onClickShowMovie(movie_id) {
-        axios.get('/api/movies/' + movie_id).then(response => {
+        axios.get('/movies/' + movie_id).then(response => {
             this.setState({
-                currentMovie: response.data
+                currentMovie: response.data,
+                renderMovie: true
             });
         }).catch(error => {
             console.log(error);
         });
     }
 
+    onClickCloseMovie() {
+        this.setState({
+            renderMovie: false
+        });
+    }
+
     render() {
-        let currentMovie = this.state.currentMovie ? (
-            <div className="col-sm-6"><Movie movie={this.state.currentMovie} /></div>
-        ) : null;
+        const currentMovie = this.state.currentMovie && this.state.renderMovie ? <Movie movie={this.state.currentMovie} onClickCloseModalMovie={this.onClickCloseMovie} /> : null;
 
         return (
-            <div className="row">
-                <div className="col-sm-6"><MoviesList onClickShowMovie={this.onClickShowMovie} /></div>
+            <div>
+                <MoviesList onClickShowMovie={this.onClickShowMovie} />
                 {currentMovie}
             </div>
         );

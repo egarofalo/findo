@@ -7,10 +7,11 @@ export default class PeopleList extends Component {
             do_ajax: false,
             people: []
         };
+        this.handleClickShowPerson = this.handleClickShowPerson.bind(this);
     }
 
     componentDidMount() {
-        axios.get('/api/people').then(response => {
+        axios.get('/people').then(response => {
             this.setState({
                 do_ajax: true,
                 people: response.data
@@ -22,11 +23,12 @@ export default class PeopleList extends Component {
 
     thead() {
         return (
-            <thead>
+            <thead className="thead-dark">
                 <tr>
                     <th>ID</th>
                     <th>First Name</th>
                     <th>Last Name</th>
+                    <th>Aliases</th>
                 </tr>
             </thead>
         );
@@ -35,9 +37,10 @@ export default class PeopleList extends Component {
     cells(person) {
         return (
             <React.Fragment>
-                <td>{person.id}</td>
+                <td><a onClick={this.handleClickShowPerson} href="#" data-id={person.id}>{person.id}</a></td>
                 <td>{person.first_name}</td>
                 <td>{person.last_name}</td>
+                <td>{person.aliases ? person.aliases : '--'}</td>
             </React.Fragment>
         );
     }
@@ -62,17 +65,20 @@ export default class PeopleList extends Component {
         );
     }
 
+    handleClickShowPerson(e) {
+        e.preventDefault();
+        this.props.onClickShowPerson(e.target.getAttribute('data-id'));
+    }
+
     render() {
         if (this.state.people.length > 0) {
             return (
-                <React.Fragment>
-                    <div className="table-responsive">
-                        <table className="table">
-                            {this.thead()}
-                            {this.tbody()}
-                        </table>
-                    </div>
-                </React.Fragment>
+                <div className="table-responsive">
+                    <table className="table table-striped">
+                        {this.thead()}
+                        {this.tbody()}
+                    </table>
+                </div>
             );
         } else if (this.state.do_ajax) {
             return (
@@ -81,6 +87,6 @@ export default class PeopleList extends Component {
                 </div>
             );
         }
-        return '';
+        return null;
     }
 }

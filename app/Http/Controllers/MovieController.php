@@ -61,8 +61,11 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
-        $movie->update($request->all());
-
+        // Get the validated data
+        $data = $request->validated();
+        // Update the movie
+        $movie->update($data);
+        // Send the updated movie
         return response()->json($movie, 201);
     }
 

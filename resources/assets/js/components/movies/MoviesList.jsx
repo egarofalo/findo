@@ -11,7 +11,7 @@ export default class MoviesList extends Component {
     }
 
     componentDidMount() {
-        axios.get('/api/movies').then(response => {
+        axios.get('/movies').then(response => {
             this.setState({
                 do_ajax: true,
                 movies: response.data
@@ -23,7 +23,7 @@ export default class MoviesList extends Component {
 
     thead() {
         return (
-            <thead>
+            <thead className="thead-dark">
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
@@ -74,7 +74,7 @@ export default class MoviesList extends Component {
         if (this.state.movies.length > 0) {
             return (
                 <div className="table-responsive">
-                    <table className="table">
+                    <table className="table table-striped">
                         {this.thead()}
                         {this.tbody()}
                     </table>
@@ -87,6 +87,6 @@ export default class MoviesList extends Component {
                 </div>
             );
         }
-        return '';
+        return null;
     }
 }

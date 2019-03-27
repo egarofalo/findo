@@ -17,10 +17,10 @@ export default class Navbar extends Component {
                                 <a className="nav-link" href="/">Home</a>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/api/movies">Movies</Link>
+                                <Link className="nav-link" to="/movies">Movies</Link>
                             </li>
                             <li>
-                                <Link className="nav-link" to="/api/people">People</Link>
+                                <Link className="nav-link" to="/people">People</Link>
                             </li>
                         </ul>
                     </div>

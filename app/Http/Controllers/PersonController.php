@@ -28,7 +28,7 @@ class PersonController extends Controller
         // Get the validated data
         $data = $request->validated();
         // Store the person
-        $person = Person::create($request->all());
+        $person = Person::create($data);
         // Return the response
         return response()->json($person, 201);
     }
@@ -41,7 +41,7 @@ class PersonController extends Controller
      */
     public function show(Person $person)
     {
-        return $person;
+        return $person->load(['moviesAsActorActress', 'moviesAsDirector', 'moviesAsProducer']);
     }
 
     /**
@@ -53,8 +53,11 @@ class PersonController extends Controller
      */
     public function update(Request $request, Person $person)
     {
-        $person->update($request->all());
-
+        // Get the validated data
+        $data = $request->validated();
+        // Update the person
+        $person->update($data);
+        // Send the updated person
         return response()->json($person, 201);
     }
 

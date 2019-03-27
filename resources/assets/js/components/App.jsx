@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Header from './Header.jsx';
-import Main from './Main.jsx';
-import Movies from "./movies/Movies.jsx";
-import PeopleList from "./people/PeopleList.jsx";
+import Header from './Header';
+import Main from './Main';
+import Movies from "./movies/Movies";
+import People from "./people/People";
 
 export default class App extends Component {
     constructor(props) {
@@ -22,8 +22,8 @@ export default class App extends Component {
                     <Header />
                     <Main>
                         <Switch>
-                            <Route exact path='/api/movies' component={Movies} />
-                            <Route exact path='/api/people' component={PeopleList} />
+                            <Route exact path='/movies' component={Movies} />
+                            <Route exact path='/people' component={People} />
                         </Switch>
                     </Main>
                 </div>

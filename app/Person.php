@@ -8,6 +8,8 @@ class Person extends Model
 {
     public $timestamps = false;
 
+    protected $fillable = ['fisrt_name', 'last_name', 'aliases'];
+
     public function moviesAsActorActress()
     {
         return $this->belongsToMany(Movie::class, 'casting');
