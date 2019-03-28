@@ -30,8 +30,8 @@ class UpdatePersonRequest extends FormRequest
             'movies_as_actor_actress.*' => 'integer|exists:movies,id',
             'movies_as_director' => 'array',
             'movies_as_director.*' => 'integer|exists:movies,id',
-            'movies_as_productor' => 'array',
-            'movies_as_productor.*' => 'integer|exists:movies,id',
+            'movies_as_producer' => 'array',
+            'movies_as_producer.*' => 'integer|exists:movies,id',
         ];
     }
 }

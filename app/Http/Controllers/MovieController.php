@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Movie;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreMovieRequest;
+use App\Http\Requests\UpdateMovieRequest;
 
 class MovieController extends Controller
 {
@@ -36,7 +37,9 @@ class MovieController extends Controller
         // Attach casting
         $movie->casting()->sync($data['casting']);
         // Attach directors
+        $movie->directors()->sync($data['directors']);
         // Attach producers
+        $movie->producers()->sync($data['producers']);
         // Return the response
         return response()->json($movie, 201);
     }
@@ -59,13 +62,22 @@ class MovieController extends Controller
      * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Movie $movie)
+    public function update(UpdateMovieRequest $request, Movie $movie)
     {
         // Get the validated data
         $data = $request->validated();
         // Update the movie
-        $movie->update($data);
-        // Send the updated movie
+        $movie->update([
+            'release_year' => $data['release_year'],
+            'title' => $data['title'],
+        ]);
+        // Attach casting
+        $movie->casting()->sync($data['casting']);
+        // Attach directors
+        $movie->directors()->sync($data['directors']);
+        // Attach producers
+        $movie->producers()->sync($data['producers']);
+        // Return the response
         return response()->json($movie, 201);
     }
 
@@ -77,6 +89,9 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
+        $movie->casting()->detach();
+        $movie->directors()->detach();
+        $movie->producers()->detach();
         $movie->delete();
 
         return response()->json(null, 204);

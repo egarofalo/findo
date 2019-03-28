@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\SignupRequest;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -12,7 +14,7 @@ class AuthController extends Controller
     /**
      * Signup into the api.
      */
-    public function signup(Request $request)
+    public function signup(SignupRequest $request)
     {
         // Get the validated data
         $data = $request->validated();
@@ -32,20 +34,20 @@ class AuthController extends Controller
      * Login into the api.
      * This method generates the access token nedded to login into the api.
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        // Get credentials
-        $credentials = $request->only('email', 'password');
+        // Get the validated credentials
+        $credentials = $request->validated();
         // Authenticate the user
         if (!Auth::attempt($credentials)) {
             return response()->json([
-                'message' => 'Unauthorized'
+                'message' => 'Invalid credentials'
             ], 401);
         }
         $user = $request->user();
         // Create the token for the given user
         $personalAccessTokenResult = $user->createToken('Personal Access Token');
-        $token = $personalAccessTokenResult->accessToken;
+        $token = $personalAccessTokenResult->token;
         if ($request->remember_me) {
             $token->expires_at = Carbon::now()->addWeeks(4);
         }
@@ -53,7 +55,7 @@ class AuthController extends Controller
         $token->save();
         // Send response
         return response()->json([
-            'access_token' => $token,
+            'access_token' => $personalAccessTokenResult->accessToken,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse($token->expires_at)->toDateTimeString(),
         ]);

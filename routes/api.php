@@ -37,8 +37,8 @@ Route::group(['prefix' => 'auth'], function () {
 Route::middleware('auth:api')->group(function () {
     Route::post('movies', 'MovieController@store');
     Route::post('people', 'PersonController@store');
-    Route::put('movies', 'MovieController@update');
-    Route::put('people', 'PersonController@update');
+    Route::put('movies/{movie}', 'MovieController@update');
+    Route::put('people/{person}', 'PersonController@update');
     Route::delete('movies/{movie}', 'MovieController@destroy');
     Route::delete('people/{person}', 'PersonController@destroy');
 });

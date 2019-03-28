@@ -28,6 +28,10 @@ class StoreMovieRequest extends FormRequest
             'release_year' => 'required|date_format:Y|after_or_equal:1900|before_or_equal:' . date('Y'),
             'casting' => 'required|array',
             'casting.*' => 'integer|exists:people,id',
+            'directors' => 'required|array',
+            'directors.*' => 'integer|exists:people,id',
+            'producers' => 'required|array',
+            'producers.*' => 'integer|exists:people,id',
         ];
     }
 
