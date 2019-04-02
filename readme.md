@@ -51,3 +51,9 @@
 - React
 - Bootstrap
 
+# NOTES
+
+## Every request must have set the following headers:
+- X-Requested-With: XMLHttpRequest
+- Accept: application/json
+

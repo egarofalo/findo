@@ -43,6 +43,7 @@
         "post-install-cmd": [
             "php artisan clear-compiled",
             "chmod -R 777 storage",
+            "php artisan migrate:fresh --seed",
             "php artisan passport:install"
         ],
         "post-root-package-install": [
