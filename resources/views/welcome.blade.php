@@ -9,11 +9,11 @@
         <!-- Title -->
         <title>Laravel</title>
         <!-- Styles -->
-        <link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet" type="text/css">
+        <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css">
     </head>
     <body>
         <div id="root"></div>
         @routes
-        <script src="{{ asset(mix('js/app.js')) }}" ></script>
+        <script src="{{ mix('js/app.js') }}" ></script>
     </body>
 </html>
