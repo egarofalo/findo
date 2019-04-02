@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
 export default class Navbar extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -14,7 +18,7 @@ export default class Navbar extends Component {
                     <div className="collapse navbar-collapse" id="navbarApp">
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item active">
-                                <a className="nav-link" href="/">Home</a>
+                                <a className="nav-link" href={route('home')}>Home</a>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/movies">Movies</Link>

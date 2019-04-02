@@ -65275,10 +65275,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Navbar = function (_Component) {
     _inherits(Navbar, _Component);
 
-    function Navbar() {
+    function Navbar(props) {
         _classCallCheck(this, Navbar);
 
-        return _possibleConstructorReturn(this, (Navbar.__proto__ || Object.getPrototypeOf(Navbar)).apply(this, arguments));
+        return _possibleConstructorReturn(this, (Navbar.__proto__ || Object.getPrototypeOf(Navbar)).call(this, props));
     }
 
     _createClass(Navbar, [{
@@ -65311,7 +65311,7 @@ var Navbar = function (_Component) {
                                 { className: 'nav-item active' },
                                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                     'a',
-                                    { className: 'nav-link', href: '/' },
+                                    { className: 'nav-link', href: route('home') },
                                     'Home'
                                 )
                             ),
@@ -65434,7 +65434,7 @@ var Movies = function (_Component) {
         value: function onClickShowMovie(movie_id) {
             var _this2 = this;
 
-            axios.get('/movies/' + movie_id).then(function (response) {
+            axios.get(route('movie', { movie: movie_id })).then(function (response) {
                 _this2.setState({
                     currentMovie: response.data,
                     renderMovie: true
@@ -65507,7 +65507,7 @@ var MoviesList = function (_Component) {
         value: function componentDidMount() {
             var _this2 = this;
 
-            axios.get('/movies').then(function (response) {
+            axios.get(route('movies')).then(function (response) {
                 _this2.setState({
                     do_ajax: true,
                     movies: response.data
@@ -65825,7 +65825,7 @@ var People = function (_Component) {
         value: function onClickShowPerson(person_id) {
             var _this2 = this;
 
-            axios.get('/people/' + person_id).then(function (response) {
+            axios.get(route('person', { person: person_id })).then(function (response) {
                 _this2.setState({
                     currentPerson: response.data,
                     renderPerson: true
@@ -65898,7 +65898,7 @@ var PeopleList = function (_Component) {
         value: function componentDidMount() {
             var _this2 = this;
 
-            axios.get('/people').then(function (response) {
+            axios.get(route('people')).then(function (response) {
                 _this2.setState({
                     do_ajax: true,
                     people: response.data

@@ -19,10 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 */
 
-Route::get('movies', 'MovieController@index');
-Route::get('people', 'PersonController@index');
-Route::get('movies/{movie}', 'MovieController@show');
-Route::get('people/{person}', 'PersonController@show');
+Route::get('movies', 'MovieController@index')->name('movies');
+Route::get('people', 'PersonController@index')->name('people');
+Route::get('movies/{movie}', 'MovieController@show')->name('movie');
+Route::get('people/{person}', 'PersonController@show')->name('person');
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'AuthController@login');

@@ -14,7 +14,7 @@ export default class People extends Component {
     }
 
     onClickShowPerson(person_id) {
-        axios.get('/people/' + person_id).then(response => {
+        axios.get(route('person', {person: person_id})).then(response => {
             this.setState({
                 currentPerson: response.data,
                 renderPerson: true

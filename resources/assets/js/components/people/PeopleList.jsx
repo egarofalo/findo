@@ -11,7 +11,7 @@ export default class PeopleList extends Component {
     }
 
     componentDidMount() {
-        axios.get('/people').then(response => {
+        axios.get(route('people')).then(response => {
             this.setState({
                 do_ajax: true,
                 people: response.data
