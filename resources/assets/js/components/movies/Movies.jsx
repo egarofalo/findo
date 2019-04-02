@@ -14,7 +14,7 @@ export default class Movies extends Component {
     }
 
     onClickShowMovie(movie_id) {
-        axios.get(route('movie', {movie: movie_id})).then(response => {
+        axios.get('/movies/' + movie_id).then(response => {
             this.setState({
                 currentMovie: response.data,
                 renderMovie: true

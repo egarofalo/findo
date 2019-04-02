@@ -13,7 +13,6 @@
     </head>
     <body>
         <div id="root"></div>
-        @routes
         <script src="{{ mix('js/app.js') }}" ></script>
     </body>
 </html>

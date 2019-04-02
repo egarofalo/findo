@@ -11,7 +11,7 @@ export default class MoviesList extends Component {
     }
 
     componentDidMount() {
-        axios.get(route('movies')).then(response => {
+        axios.get('/movies').then(response => {
             this.setState({
                 do_ajax: true,
                 movies: response.data
